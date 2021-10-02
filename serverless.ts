@@ -1,11 +1,13 @@
 import type { AWS } from '@serverless/typescript';
 
 import {hello} from '@functions/hello';
+import { auth } from '@functions/auth';
 import {garden} from '@functions/garden';
 
 
 const serverlessConfiguration: AWS = {
   service: 'udacity-capstone',
+  configValidationMode: "error",
   frameworkVersion: '2',
   custom: {
     esbuild: {
@@ -36,7 +38,7 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: '20201221',
   },
   // import the function via paths
-  functions: { hello, ...garden},
+  functions: { auth, hello, ...garden},
 };
 
 module.exports = serverlessConfiguration;

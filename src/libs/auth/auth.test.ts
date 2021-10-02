@@ -1,8 +1,6 @@
-export const {
-    IS_OFFLINE
-} = process.env
+import { AuthVerifier } from "./auth";
 
-export const AUTH_CERTIFICATE = `
+const cert = `
 -----BEGIN CERTIFICATE-----
 MIIDDTCCAfWgAwIBAgIJHuIQ0d0xpGRZMA0GCSqGSIb3DQEBCwUAMCQxIjAgBgNV
 BAMTGWRldi12Z2IxYWltOS51cy5hdXRoMC5jb20wHhcNMjEwOTMwMjIxMzQ5WhcN
@@ -22,4 +20,13 @@ tuch1jg7vUG6M9BLa1c1dmyRs6DSnh3pXSsDkgzNMOEVpJJoIp3Uc3Yjg/KJxIGB
 Z42jwxxVyDPi34w+48WuFoaAit70gvMmdH6flHeUoctV8F4NyQklCCbbXHQM5Utb
 fH+96jtFI73rKul/Ig7hr+s=
 -----END CERTIFICATE-----
-`
+`;
+
+test("verify expired token", async () => {
+  const auth = new AuthVerifier(cert);
+  await expect(
+    auth.verifyToken(
+      `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im5pV3Bnb195TEZMaVhWSEZNcnI0WiJ9.eyJpc3MiOiJodHRwczovL2Rldi12Z2IxYWltOS51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDAxOTQ5MzMxMjU1Mzc0MTE4ODgiLCJhdWQiOiJTbmhWV0JCWnVSVDhSN0g2ZVI1aFFodjFSbjg5MGwwUyIsImlhdCI6MTYzMzA5Njg5MSwiZXhwIjoxNjMzMTMyODkxLCJhdF9oYXNoIjoiRVBRc1lEeWFOWlBrdU4ySTBuNVlUQSIsIm5vbmNlIjoiLlVpdkRFdDVpeVVhWDB2ZGRhWGtZWVBQNXBqTUNJcW4ifQ.GTvCrDX1TmcMjJ4F7f1edCOQW52w6ipOt45eOIev4fDFBXosROxjZe-T0qT2hA-C02pS14SVQCKLD8hYEWZRCfQPrnIYiPrATTz_wTM2OA-JA8RNDYzBR7XmJiFItGcSFXJkhSnrliXdKNRiswrBgORtKW7zxvi62ZjUOlcgxvbBSApcVJ6KVo_BOoK0t0EkBDKugQtw_-M9JOR42uFbhMlNzOHt4NmifL9Yn5lZUEo7Qoukz1yD1F35rVLVQtpDnumX9KQOGwQeSzlifjSb0BJaSSa3ltiDhCN-P3_F6LCqkgQkLIrVWuNCk4DNdKoAwpkhA8HwtV4aP0mpGV0gaA`
+    )
+  ).rejects.toThrowError("jwt expired");
+});

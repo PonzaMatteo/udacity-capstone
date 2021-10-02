@@ -1,5 +1,5 @@
-import schema from './schema';
-import { handlerPath } from '@libs/handlerResolver';
+import schema from "./schema";
+import { handlerPath } from "@libs/handlerResolver";
 
 export const garden = {
   getAllPlants: {
@@ -7,24 +7,30 @@ export const garden = {
     events: [
       {
         http: {
-          method: 'get',
-          path: 'plants',
-        }
-      }
-    ]
+          method: "get",
+          path: "plants",
+          cors: true,
+          authorizer: {
+            name: "auth"
+          },
+        },
+      },
+    ],
   },
   createPlant: {
     handler: `${handlerPath(__dirname)}/handler.createPlant`,
     events: [
       {
         http: {
-          method: 'post',
-          path: 'plants',
-          schemas: {
-            "application/json": schema.createPlantRequest
-          }
-        }
-      }
-    ]
-  }
-} 
+          method: "post",
+          path: "plants",
+          request: {
+            schemas: {
+              "application/json": schema.createPlantRequest,
+            },
+          },
+        },
+      },
+    ],
+  },
+};
