@@ -24,6 +24,10 @@ export const garden = {
         http: {
           method: "post",
           path: "plants",
+          authorizer: {
+            name: "auth"
+          },
+          cors: true,
           request: {
             schemas: {
               "application/json": schema.createPlantRequest,
