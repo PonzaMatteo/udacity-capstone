@@ -1,4 +1,5 @@
 import { AuthVerifier } from "@libs/auth/auth";
+import { JwtPayload } from "@libs/auth/models";
 import { middyfy } from "@libs/lambda";
 import { createLogger } from "@libs/log/log";
 import {

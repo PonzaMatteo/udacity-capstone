@@ -1,6 +1,5 @@
-export const {
-    IS_OFFLINE
-} = process.env
+export const { IS_OFFLINE, PLANTS_TABLE, PLANTS_CREATED_AT_INDEX } =
+  process.env;
 
 export const AUTH_CERTIFICATE = `
 -----BEGIN CERTIFICATE-----
@@ -22,4 +21,4 @@ tuch1jg7vUG6M9BLa1c1dmyRs6DSnh3pXSsDkgzNMOEVpJJoIp3Uc3Yjg/KJxIGB
 Z42jwxxVyDPi34w+48WuFoaAit70gvMmdH6flHeUoctV8F4NyQklCCbbXHQM5Utb
 fH+96jtFI73rKul/Ig7hr+s=
 -----END CERTIFICATE-----
-`
+`;

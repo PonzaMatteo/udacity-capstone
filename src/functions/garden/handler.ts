@@ -15,7 +15,7 @@ const plantsHandler: ValidatedEventAPIGatewayProxyEvent<typeof schema.plants> =
   async (event) => {
     const userId = getUserId(event);
     logger.info(`received new get plants event for user ${userId}`, event);
-    const plants = service.getPlants(userId);
+    const plants = await service.getPlants(userId);
     return formatJSONResponse({
       items: plants,
     });
@@ -27,7 +27,7 @@ const createPlantHandler: ValidatedEventAPIGatewayProxyEvent<
   const userId = getUserId(event);
   logger.info(`received new create plant event for user ${userId}`, event);
   const req: CreatePlantRequest = event.body;
-  const plant = service.createPlant(userId, req);
+  const plant = await service.createPlant(userId, req);
   return formatJSONResponse({ item: plant });
 };
 
