@@ -13,8 +13,11 @@
     "@middy/core": "^1.5.2",
     "@middy/http-json-body-parser": "^1.5.2",
     "@types/jsonwebtoken": "^8.5.5",
+    "@types/nanoid": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
+    "nanoid": "^3.1.28",
     "serverless-express": "^2.0.12",
+    "shortid": "^2.2.16",
     "winston": "^3.3.3"
   },
   "devDependencies": {

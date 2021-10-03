@@ -6,9 +6,11 @@ export default {
   createPlantRequest: {
     type: "object",
     properties: {
-      name: { type: "string" },
-      type: { type: "string" },
+      name: {
+        type: "string",
+        minLength: 3,
+      },
     },
-    required: ["name", "type"],
+    required: ["name"],
   },
 } as const;

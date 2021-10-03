@@ -4,6 +4,7 @@ import { handlerPath } from "@libs/handlerResolver";
 export const garden = {
   getAllPlants: {
     handler: `${handlerPath(__dirname)}/handler.getAllPlants`,
+    tracing: true,
     events: [
       {
         http: {

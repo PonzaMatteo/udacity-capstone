@@ -5,6 +5,7 @@ import {
   APIGatewayAuthorizerResult,
   APIGatewayTokenAuthorizerEvent,
 } from "aws-lambda";
+import { decode } from "jsonwebtoken";
 
 import { AUTH_CERTIFICATE } from "src/config/config";
 
@@ -50,5 +51,21 @@ export const authHandler = async (
     };
   }
 };
+
+export function getUserId(event: any): string {
+  const authorization = event?.headers?.Authorization
+  if (!authorization) {
+    throw Error("missing auth token")
+  }
+  const split = authorization.split(' ')
+  const jwtToken = split[1]
+
+  return parseUserId(jwtToken)
+}
+
+ function parseUserId(jwtToken: string): string {
+  const decodedJwt = decode(jwtToken) as JwtPayload
+  return decodedJwt.sub
+}
 
 export const auth = middyfy(authHandler)
